@@ -1,0 +1,17 @@
+{
+  "as_of": "2026-09-08",
+  "currency": "ChatGPT credits",
+  "basis": "current-rate equivalent, not historical billing",
+  "source": "https://developers.openai.com/codex/pricing",
+  "speed_source": "https://developers.openai.com/codex/speed",
+  "note": "每百万 token 的官方 credit 费率快照。用于统一按当前费率折算，不证明历史实际扣额，也不推算订阅剩余百分比。未知模型、未知缓存或未知速度不生成完整扣额估算。未附美元 API 费率。",
+  "models": {
+    "gpt-6-astra": {"input":250,"cached":25,"output":1250,"fast_multiplier":2.5},
+    "gpt-5.6-sol": {"input":100,"cached":10,"output":500,"fast_multiplier":2.5},
+    "gpt-5.6-terra": {"input":50,"cached":5,"output":300,"fast_multiplier":2.5},
+    "gpt-5.6-luna": {"input":5,"cached":0.5,"output":30,"fast_multiplier":2.5},
+    "gpt-5.5": {"input":125,"cached":12.5,"output":750,"fast_multiplier":2.5},
+    "gpt-5.4": {"input":62.5,"cached":6.25,"output":375,"fast_multiplier":2},
+    "gpt-5.4-mini": {"input":18.75,"cached":1.875,"output":113}
+  }
+}

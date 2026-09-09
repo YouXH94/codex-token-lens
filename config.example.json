@@ -1,0 +1,6 @@
+{
+  "roots": [
+    {"path": "~/.codex", "label": "本机 Codex"},
+    {"path": "~/.codex-work", "label": "工作用日志目录"}
+  ]
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="Codex Token Lens：独立、只读、本地用量账本"><title>Codex Token Lens · 本地用量</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true"><defs>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-12 4h1m4 0h1"/></symbol>
+<symbol id="i-thread" viewBox="0 0 24 24"><path d="M8 19H5a2 2 0 0 1-2-2V6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v11a2 2 0 0 1-2 2h-7l-4 3zM7 8h10M7 12h7"/></symbol>
+<symbol id="i-model" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5m-9 5v10"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m8 10V4m8 16v-7"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM8 12l3 3 5-6"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="10" cy="18" r="2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7A9 9 0 0 0 4 6L2 9m0-6v6h6m-4 8a9 9 0 0 0 16 1l2-3m0 6v-6h-6"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 5V3H3v13h2"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V4h6l3 3h9v13H3z"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 4 5 5M3 21l5-1L21 7l-5-5L3 15z"/></symbol>
+<symbol id="i-cache" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 4 16 4 16 0V5M4 12v7c0 4 16 4 16 0v-7"/></symbol>
+<symbol id="i-credit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8h-5a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H9m3-10v12"/></symbol>
+</defs></svg>
+<div class="app-shell">
+<header class="topbar"><div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-model"/></svg></span><div><strong>Codex <span>Token Lens</span></strong><small>让每一次用量，都有迹可循。</small></div><span class="local-tag">独立本地版</span></div><div class="top-actions"><span class="status" id="connection"><i></i>正在连接</span><button class="iconbtn" id="refreshBtn" title="刷新用量" aria-label="刷新用量"><svg class="icon"><use href="#i-refresh"/></svg></button><button class="iconbtn" data-page="settings" title="设置与只读边界" aria-label="设置与只读边界"><svg class="icon"><use href="#i-settings"/></svg></button></div></header>
+<aside class="sidebar"><div class="side-caption">工作空间</div><nav aria-label="主导航"><button data-page="monitor" class="navbtn active"><svg class="icon"><use href="#i-grid"/></svg><span>用量监控</span></button><button data-page="models" class="navbtn"><svg class="icon"><use href="#i-model"/></svg><span>模型分布</span></button><button data-page="diagnostics" class="navbtn"><svg class="icon"><use href="#i-shield"/></svg><span>日志诊断</span><b id="diagCount" hidden></b></button></nav><div class="side-bottom"><button data-page="settings" class="navbtn"><svg class="icon"><use href="#i-settings"/></svg><span>设置与边界</span></button><div class="privacy-card"><svg class="icon"><use href="#i-shield"/></svg><strong>只读，不打扰</strong><p>不调用模型<br>不更改 Codex 文件</p></div><small>Token Lens <span id="version">0.2.0</span></small></div></aside>
+<main id="main" class="main">
+<div id="notice" class="notice" hidden></div>
+<div id="scopeNotice" class="notice" hidden></div>
+<div class="page-heading"><div><p class="eyebrow">LOCAL USAGE / 本地账本</p><h1 id="pageTitle">用量，一目了然。</h1></div><div class="heading-right"><span id="nowLabel"></span><button id="exportBtn" class="button"><svg class="icon"><use href="#i-down"/></svg>导出</button></div></div>
+<section class="kpi-grid" id="kpis" aria-label="用量概况"></section>
+<div class="global-filters"><label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索 Thread、项目或模型" aria-label="搜索 Thread、项目或模型"><kbd>/</kbd></label><select id="modelFilter" aria-label="模型筛选"><option value="">全部模型</option></select><select id="projectFilter" aria-label="项目筛选"><option value="">全部项目</option></select><select id="rootFilter" aria-label="日志来源筛选"><option value="">全部来源</option></select><button class="textbtn" id="clearFilters">重置</button></div>
+<section id="monitorPage">
+<div class="tabsbar"><div class="tabs" role="tablist" aria-label="统计方式"><button data-tab="daily" role="tab" aria-selected="false"><svg class="icon"><use href="#i-clock"/></svg>每日按时</button><button data-tab="cycle" role="tab" aria-selected="false"><svg class="icon"><use href="#i-calendar"/></svg>周期</button><button class="active" data-tab="threads" role="tab" aria-selected="true"><svg class="icon"><use href="#i-thread"/></svg>Threads</button></div><span class="quiet" id="rangeHint"></span></div>
+<div id="workspace" class="workspace">
+<div class="workspace-main">
+<div class="view-controls" id="viewControls"></div>
+<section id="primaryChart" class="panel" hidden></section>
+<section class="panel threads-panel"><div class="panel-head"><div><h2 id="threadHeading">Threads 用量</h2><p id="threadHint"></p></div><label class="merge-label"><input id="mergeChildren" type="checkbox">合并子代理</label></div><div class="table-wrap"><table id="threadTable"><thead><tr><th class="thread-col"><button data-sort="title">Thread / 项目</button></th><th><button data-sort="total_tokens">总量 ↓</button></th><th><button data-sort="input_tokens">输入</button></th><th><button data-sort="output_tokens">输出</button></th><th><button data-sort="cache_rate">缓存命中</button></th><th><button data-sort="reasoning_output_tokens">推理</button></th><th><button data-sort="latest">最近活动</button></th></tr></thead><tbody id="threadRows"></tbody></table></div><div class="table-foot"><span id="tableCount"></span><div><button id="prevPage" class="iconbtn" title="上一页" aria-label="上一页"><svg class="icon flip"><use href="#i-arrow"/></svg></button><span id="pageCount"></span><button id="nextPage" class="iconbtn" title="下一页" aria-label="下一页"><svg class="icon"><use href="#i-arrow"/></svg></button></div></div></section>
+<div class="mini-panels"><section id="miniHourly" class="panel"></section><section id="miniHeatmap" class="panel"></section></div>
+<div class="inline-rule"><svg class="icon"><use href="#i-shield"/></svg><span>输入含缓存，输出含推理；分项不重复相加。</span></div>
+</div>
+<aside id="detailPanel" class="detail-panel panel" aria-label="Thread 详情" hidden></aside>
+</div></section>
+<section id="modelsPage" hidden></section><section id="diagnosticsPage" hidden></section><section id="settingsPage" hidden></section>
+<footer class="footer"><span><i class="dot green"></i>独立进程 · 只读采集</span><span id="syncInfo">等待数据</span><span id="zoneInfo"></span></footer>
+</main></div>
+<dialog id="dialog" aria-labelledby="dialogTitle"><div class="dialog-head"><h2 id="dialogTitle"></h2><button class="iconbtn" id="closeDialog" aria-label="关闭弹窗"><svg class="icon"><use href="#i-close"/></svg></button></div><div id="dialogBody"></div></dialog>
+<div id="tooltip" role="tooltip" hidden></div><div id="toast" role="status" hidden></div>
+<script>/*__EMBEDDED__*/</script><script src="/static/format.js"></script><script src="/static/app.js"></script>
+</body></html>
