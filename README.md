@@ -1,5 +1,7 @@
 # Codex Token Lens · 0.2.0
 
+简体中文 | [English](README.en.md)
+
 **独立运行、只读本地日志的 Codex 用量面板。**采用第三版浅色分栏设计，默认进入 Threads；数字使用中文数量级。无需 MCP、API Key、模型调用或修改 Codex 配置。
 
 > 此发行包为 Python 源码版，不是签名安装程序。运行软件后读取本地日志。
